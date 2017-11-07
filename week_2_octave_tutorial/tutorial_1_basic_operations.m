@@ -280,7 +280,150 @@ D = [A; B]
 %     13    14
 %     15    16
 
-%% 5. COMPUTING ON DATA
+%% 5. LINEAR ALGEBRA
+
+% Create a matrix.
+A = [1, 2, 3; 4, 5, 6; 7, 8, 9; 10, 11, 12]
+%      1     2     3
+%      4     5     6
+%      7     8     9
+%     10    11    12
+
+% Initilize a vactor.
+v = [1; 2; 3]
+%      1
+%      2
+%      3
+
+% Get the dimensions of the matrix - m = rows and n = columns.
+[m, n] = size(A)
+% m = 4
+% n = 3
+
+% Get the dimensions of the matrix - tuple like solution.
+dim_A = size(A)
+%      4     3
+     
+% Get the dimensions of the vector.
+dim_v = size(v)
+%      3     1
+
+% Get element of a matrix by specifying row and column.
+A_23 = A(2, 3)
+%      6
+
+% Matrix element-wise addition.
+A = [1, 2, 4; 5, 3, 2]
+%      1     2     4
+%      5     3     2
+     
+B = [1, 3, 4; 1, 1, 1]
+%      1     3     4
+%      1     1     1
+     
+add_AB = A + B
+%      2     5     8
+%      6     4     3
+
+% Matrix element-wise subtraction.
+sub_AB = A - B
+%      0    -1     0
+%      4     2     1
+
+% Scalar matrix multiplication.
+s = 2
+%      2
+mult_As = A * s
+%      2     4     8
+%     10     6     4
+
+% Scalar matrix division.
+div_As = A / s
+%     0.5000    1.0000    2.0000
+%     2.5000    1.5000    1.0000
+
+% Scalar matrix addition.
+add_As = A + s
+%      3     4     6
+%      7     5     4
+
+% Matrix vector multiplication.
+A = [1, 2, 3; 4, 5, 6;, 7, 8, 9]
+%      1     2     3
+%      4     5     6
+%      7     8     9
+
+v = [1; 1; 1]
+%      1
+%      1
+%      1
+
+Av = A * v
+%     6
+%     15
+%     24
+
+% Multiply matrices.
+A = [1, 2; 3, 4; 5, 6]
+%      1     2
+%      3     4
+%      5     6
+     
+B = [1; 2]
+%      1
+%      2
+     
+mult_AB = A * B % We expect a resulting matrix of (3 by 2)*(2 by 1) = (3 by 1) 
+%      5
+%     11
+%     17
+
+% Multiply by identity matrix.
+A = [1, 2; 4, 5]
+%      1     2
+%      4     5
+
+I = eye(2)
+%      1     0
+%      0     1
+
+IA = I * A
+%      1     2
+%      4     5
+     
+AI = A * I
+%      1     2
+%      4     5
+
+% Matrix multiplication is not commutative.
+B = [1, 2;, 0, 2]
+%      1     2
+%      0     2
+     
+AB = A * B
+%      1     6
+%      4    18
+     
+BA = B * A % AB != BA
+%      9    12
+%      8    10
+
+% Transpose matrix.
+A_trans = A'
+%      1     4
+%      2     5
+
+% Inverse matrix.
+A_inv = inv(A)
+%    -1.6667    0.6667
+%     1.3333   -0.3333
+  
+% A^(-1)*A?
+A_invA = inv(A) * A
+%      1     0
+%      0     1
+
+%% 6. COMPUTING ON DATA
 
 A = [1, 2; 3, 4; 5, 6]
 %      1     2
@@ -512,7 +655,7 @@ pinv(A)
 %    -0.0611    0.0222    0.1056
 %    -0.0194    0.1889   -0.1028
 
-%% 6. CONTROL STATEMENTS
+%% 7. CONTROL STATEMENTS
 
 v = zeros(10, 1)
 %      0
@@ -590,7 +733,7 @@ else
 end;
 % The value is not one or two.
 
-%% 7. PLOTTING DATA
+%% 8. PLOTTING DATA
 
 % Plotting gives great insight into data and what is going on.
 
@@ -639,7 +782,7 @@ clf;
 imagesc(A)
 imagesc(A), colorbar, colormap gray;
 
-%% 8. FUNCTIONS
+%% 9. FUNCTIONS
 
 % Define function.
 % - each function is in separate file of the name same as the function name.
@@ -705,3 +848,4 @@ sqrErrors = (predictions - y).^2;   % squared errors
 
 J = 1 / (2 * m) * sum(sqrErrors);
 end
+     
