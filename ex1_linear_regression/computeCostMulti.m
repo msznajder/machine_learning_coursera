@@ -13,7 +13,6 @@ J = 0;
 % Instructions: Compute the cost of a particular choice of theta
 %               You should set J to the cost.
 predictions = X * theta;                        % each row being one training data record
-% predictions =  sum(theta' .* X, 2);           % alternative method
 sumSqrError = sum((predictions - y).^2);        % sum cols to get squared error
 J = 1 / (2 * m) * sumSqrError;                  % multiply to get cost
 % =========================================================================
