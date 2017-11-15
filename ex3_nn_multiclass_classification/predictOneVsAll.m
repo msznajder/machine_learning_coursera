@@ -30,18 +30,10 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
-% p = sigmoid(X * theta);
-% p(p >= 0.5) = 1;
-% p(p < 0.5) = 0;
-
-size(X)
-size(all_theta)
-size(p)
-
-size(X * all_theta)
-
-num_labels
+pp = zeros(size(X, 1), num_labels);
+for c = 1:num_labels
+    pp(:, c) = sigmoid(X * all_theta(c, :)');
+end
+[Y, p] = max(pp, [], 2);
 % =========================================================================
-
-
 end
