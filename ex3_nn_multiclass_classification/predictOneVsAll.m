@@ -34,10 +34,6 @@ pp = zeros(size(X, 1), num_labels);
 for c = 1:num_labels
     pp(:, c) = sigmoid(X * all_theta(c, :)');
 end
-size(X)
-size(all_theta(c, :)')
-size(pp)
 [Y, p] = max(pp, [], 2);
-size(p)
 % =========================================================================
 end
