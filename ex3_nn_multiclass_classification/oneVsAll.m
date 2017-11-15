@@ -8,12 +8,11 @@ function [all_theta] = oneVsAll(X, y, num_labels, lambda)
 %   to the classifier for label i
 
 % Some useful variables
-m = size(X, 1);
-n = size(X, 2);
+m = size(X, 1)
+n = size(X, 2)
 
 % You need to return the following variables correctly 
 all_theta = zeros(num_labels, n + 1);
-
 % Add ones to the X data matrix
 X = [ones(m, 1) X];
 
@@ -65,5 +64,5 @@ for c = 1:num_labels
     all_theta(c, :) = theta';
 end
 % =========================================================================
-
+size(all_theta)
 end
