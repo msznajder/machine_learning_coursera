@@ -30,12 +30,17 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
+% p = sigmoid(X * theta);
+% p(p >= 0.5) = 1;
+% p(p < 0.5) = 0;
 
+size(X)
+size(all_theta)
+size(p)
 
+size(X * all_theta)
 
-
-
-
+num_labels
 % =========================================================================
 
 

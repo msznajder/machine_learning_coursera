@@ -53,25 +53,17 @@ X = [ones(m, 1) X];
 initial_theta = zeros(n + 1, 1);
 
 % Set options for fminunc
-options = optimset('GradObj', 'on', 'MaxIter', 50);
+options = optimset('GradObj', 'on', 'MaxIter', 5);
 
 % Run fmincg to obtain the optimal theta
 % This function will return theta and the cost 
 
-y == 10!!!!!! to jest genialne
-w ten sposob przygotowujemy ten one-vs-all logistic regression classificator
-klasa oznaczona staje sie naszymi x na wykresie, a pozostale staja sie zerami na wykresie
-w ten sposob mamy w funckji kosztu wykorzystanie tych dwoch kejsow (1 - y) i obliczanie jednej frakcji funkcji
-dla y = 0 lub dla y = 1
-kiedy y = 1 i h = 1 koszt jest 0, kiedy y = 1 i h = 0 koszt jest nieskonczony (pierwszy wykres)
-kiedy y = 0 i h = 0 koszt jest 0, kiedy y = 1 i h = 1 koszt jest nieskonczony.
-
-[theta] = ...
-    fmincg (@(t)(lrCostFunction(t, X, (y == 10), lambda)), ...
+for c = 1:num_labels
+    [theta] = ...
+    fmincg (@(t)(lrCostFunction(t, X, (y == c), lambda)), ...
             initial_theta, options);
-
-theta
+    all_theta(c, :) = theta';
+end
 % =========================================================================
-
 
 end
