@@ -38,7 +38,36 @@ Theta2_grad = zeros(size(Theta2));
 %         variable J. After implementing Part 1, you can verify that your
 %         cost function computation is correct by verifying the cost
 %         computed in ex4.m
-%
+
+% Recode labels as vectors.
+y_vectorized = zeros(num_labels, m);
+for col=1:size(y_vectorized,2)
+    y_vectorized(y(col), col) = 1; % 10 x 5000
+end
+
+% Forward propagation.
+X = [ones(m, 1), X];
+z2 = Theta1 * X';
+a2 = sigmoid(z2);
+a2 = [ones(1, m); a2];
+z3 = Theta2 * a2;
+h = sigmoid(z3); % 10 x 5000
+
+% Regularization.
+reg_cost = (lambda / (2 * m)) * (sum(sum(Theta1 .^ 2)) + sum(sum(Theta2 .^ 2)));
+
+% Compute the cost.
+J_sum = 0;
+for c = 1: m
+    % We calculate subcost (equation second sigma) for given example for
+    % all outputs and labels at once here. Then we sum it for all examples
+    % (equation first sigma).
+    J_sum = J_sum + (-y_vectorized(:, c)' * log(h(:, c)) - (1 - y_vectorized(:, c))' * log(1 - h(:, c)));
+end
+
+J_cost = (1 / m) * J_sum; 
+J = J_cost + reg_cost;
+
 % Part 2: Implement the backpropagation algorithm to compute the gradients
 %         Theta1_grad and Theta2_grad. You should return the partial derivatives of
 %         the cost function with respect to Theta1 and Theta2 in Theta1_grad and
@@ -53,7 +82,6 @@ Theta2_grad = zeros(size(Theta2));
 %         Hint: We recommend implementing backpropagation using a for-loop
 %               over the training examples if you are implementing it for the 
 %               first time.
-%
 % Part 3: Implement regularization with the cost function and gradients.
 %
 %         Hint: You can implement this around the code for
