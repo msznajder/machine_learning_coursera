@@ -40,9 +40,9 @@ Theta2_grad = zeros(size(Theta2));
 %         computed in ex4.m
 
 % Recode labels as vectors.
-y_vectorized = zeros(num_labels, m);
+y_vectorized = zeros(num_labels, m); % 10 x 5000
 for col=1:size(y_vectorized,2)
-    y_vectorized(y(col), col) = 1; % 10 x 5000
+    y_vectorized(y(col), col) = 1; 
 end
 
 % Forward propagation.
@@ -82,6 +82,39 @@ J = J_cost + reg_cost;
 %         Hint: We recommend implementing backpropagation using a for-loop
 %               over the training examples if you are implementing it for the 
 %               first time.
+
+% h; % 10 x 5000
+% y_vectorized; % 10 x 5000
+% X; % 5000 x 401
+% Theta2; % 10 x 26
+% z2; % 25 x 5000
+% sigmoidGradient(z2(:, 1)); % 25 x 1
+% [ones(1, 1); z2(:, 1)]; % 26 x 1
+% size(a2(2:end, 1)) % 26 x 1
+
+big_delta_1 = zeros(hidden_layer_size, input_layer_size + 1); % 25 x 401
+big_delta_2 = zeros(num_labels, hidden_layer_size + 1); % 10 x 26
+
+for row=1:m
+    delta_3 = h(:, row) - y_vectorized(:, row); % 10 x 1, r x m
+    
+    size(z2(:, 1)); % 25 x 1, h x m
+    size(Theta2(:,2:end)); % 10 x 25
+    size(z2(:, row)); % 25 x 1
+    delta_2 = Theta2(:,2:end)' * delta_3 .* z2(:, row); % 25 x 1, h x m
+    
+    size(delta_2);
+    size(X(row, :));
+    big_delta_1 = big_delta_1 + delta_2 * X(row, :); % 25 x 401, h x n
+    
+    size(delta_3); % 10 x 1, r x m
+    size(a2(:, row)); % 26 x 1, [h+1] x m
+    big_delta_2 = big_delta_2 + delta_3 * a2(:, row)'; % 10 x 26, r x [h+1]
+end
+
+Theta1_grad = (1 / m) * big_delta_1; % 25 x 401
+Theta2_grad = (1 / m) * big_delta_2; % 10 x 26
+
 % Part 3: Implement regularization with the cost function and gradients.
 %
 %         Hint: You can implement this around the code for
@@ -90,23 +123,11 @@ J = J_cost + reg_cost;
 %               and Theta2_grad from Part 2.
 %
 
+Theta1_lambda = (lambda / m) * [zeros(size(Theta1, 1), 1), Theta1(:, 2:end)];
+Theta2_lambda = (lambda / m) * [zeros(size(Theta2, 1), 1), Theta2(:, 2:end)];
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+% Theta1_grad = Theta1_grad + Theta1_lambda;
+% Theta2_grad = Theta2_grad + Theta2_lambda;
 
 % -------------------------------------------------------------
 
@@ -114,6 +135,6 @@ J = J_cost + reg_cost;
 
 % Unroll gradients
 grad = [Theta1_grad(:) ; Theta2_grad(:)];
-
+% size(grad)
 
 end
