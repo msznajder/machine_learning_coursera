@@ -53,9 +53,6 @@ a2 = [ones(1, m); a2];
 z3 = Theta2 * a2;
 h = sigmoid(z3); % 10 x 5000
 
-% Regularization.
-reg_cost = (lambda / (2 * m)) * (sum(sum(Theta1 .^ 2)) + sum(sum(Theta2 .^ 2)));
-
 % Compute the cost.
 J_sum = 0;
 for c = 1: m
@@ -66,6 +63,10 @@ for c = 1: m
 end
 
 J_cost = (1 / m) * J_sum; 
+
+% Regularization.
+reg_cost = (lambda / (2 * m)) * (sum(sum(Theta1 .^ 2)) + sum(sum(Theta2 .^ 2)));
+
 J = J_cost + reg_cost;
 
 % Part 2: Implement the backpropagation algorithm to compute the gradients
@@ -101,7 +102,8 @@ for row=1:m
     size(z2(:, 1)); % 25 x 1, h x m
     size(Theta2(:,2:end)); % 10 x 25
     size(z2(:, row)); % 25 x 1
-    delta_2 = Theta2(:,2:end)' * delta_3 .* z2(:, row); % 25 x 1, h x m
+    
+    delta_2 = Theta2(:,2:end)' * delta_3 .* sigmoidGradient(z2(:, row)); % 25 x 1, h x m
     
     size(delta_2);
     size(X(row, :));
@@ -126,8 +128,8 @@ Theta2_grad = (1 / m) * big_delta_2; % 10 x 26
 Theta1_lambda = (lambda / m) * [zeros(size(Theta1, 1), 1), Theta1(:, 2:end)];
 Theta2_lambda = (lambda / m) * [zeros(size(Theta2, 1), 1), Theta2(:, 2:end)];
 
-% Theta1_grad = Theta1_grad + Theta1_lambda;
-% Theta2_grad = Theta2_grad + Theta2_lambda;
+Theta1_grad = Theta1_grad + Theta1_lambda;
+Theta2_grad = Theta2_grad + Theta2_lambda;
 
 % -------------------------------------------------------------
 
