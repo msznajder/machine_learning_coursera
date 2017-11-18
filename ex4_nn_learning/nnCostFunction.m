@@ -62,7 +62,7 @@ for c = 1: m
     J_sum = J_sum + (-y_vectorized(:, c)' * log(h(:, c)) - (1 - y_vectorized(:, c))' * log(1 - h(:, c)));
 end
 
-J_cost = (1 / m) * J_sum; 
+J_cost = (1 / m) * J_sum;
 
 % Regularization.
 reg_cost = (lambda / (2 * m)) * (sum(sum(Theta1 .^ 2)) + sum(sum(Theta2 .^ 2)));
@@ -125,8 +125,12 @@ Theta2_grad = (1 / m) * big_delta_2; % 10 x 26
 %               and Theta2_grad from Part 2.
 %
 
+% TODO: Incorrect value!
 Theta1_lambda = (lambda / m) * [zeros(size(Theta1, 1), 1), Theta1(:, 2:end)];
 Theta2_lambda = (lambda / m) * [zeros(size(Theta2, 1), 1), Theta2(:, 2:end)];
+
+% Theta1_lambda = lambda * [zeros(size(Theta1, 1), 1), Theta1(:, 2:end)];
+% Theta2_lambda = lambda * [zeros(size(Theta2, 1), 1), Theta2(:, 2:end)];
 
 Theta1_grad = Theta1_grad + Theta1_lambda;
 Theta2_grad = Theta2_grad + Theta2_lambda;
