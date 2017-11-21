@@ -25,16 +25,12 @@ centroids = zeros(K, n);
 %
 % Note: You can use a for-loop over the centroids to compute this.
 %
-
-
-
-
-
-
-
-
+X_idx = [X, idx]
+for row = 1:K
+    centroid_points = X_idx(X_idx(:, 3) == row, 1:n);
+    centroids(row, :) = mean(centroid_points);
+end
 % =============================================================
-
 
 end
 
