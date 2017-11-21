@@ -44,15 +44,15 @@ fprintf(' %d', idx(1:3));
 fprintf('\n(the closest centroids should be 1, 3, 2 respectively)\n');
 
 fprintf('Program paused. Press enter to continue.\n');
-% pause;
+pause;
 
-% ===================== Part 2: Compute Means =========================
- After implementing the closest centroids function, you should now
- complete the computeCentroids function.
-
+%% ===================== Part 2: Compute Means =========================
+%  After implementing the closest centroids function, you should now
+%  complete the computeCentroids function.
+%
 fprintf('\nComputing centroids means.\n\n');
 
- Compute means based on the closest centroids found in the previous part.
+%  Compute means based on the closest centroids found in the previous part.
 centroids = computeCentroids(X, idx, K);
 
 fprintf('Centroids computed after initial finding of closest centroids: \n')
