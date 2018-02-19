@@ -80,6 +80,8 @@ pause;
 % Compute and display cost and gradient
 % with all-ones theta and lambda = 10
 test_theta = ones(size(X,2),1);
+disp(test_theta)
+disp(size(test_theta))
 [cost, grad] = costFunctionReg(test_theta, X, y, 10);
 
 fprintf('\nCost at test theta (with lambda = 10): %f\n', cost);

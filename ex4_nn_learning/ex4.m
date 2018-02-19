@@ -35,6 +35,10 @@ fprintf('Loading and Visualizing Data ...\n')
 load('ex4data1.mat');
 m = size(X, 1);
 
+
+dlmwrite('ex4data1_X.txt',X)
+dlmwrite('ex4data1_y.txt',y)
+
 % Randomly select 100 data points to display
 sel = randperm(size(X, 1));
 sel = sel(1:100);

@@ -21,8 +21,10 @@ grad = zeros(size(theta));
 %
 h = sigmoid(X * theta);
 J_sum_expr = -y' * log(h) - (1 - y)' * log(1 - h);
+disp(J_sum_expr
 J = (1 / m) * J_sum_expr;
 
+h = sigmoid(X * theta);
 grad_sum_expr = X' * (h - y);
 grad = (1 / m) * grad_sum_expr; 
 % =============================================================
